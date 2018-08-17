@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +21,6 @@ import com.bridgelabz.fundoonotes.user.models.LoginDTO;
 import com.bridgelabz.fundoonotes.user.models.RegistrationDTO;
 import com.bridgelabz.fundoonotes.user.models.ResetPasswordDTO;
 import com.bridgelabz.fundoonotes.user.models.Response;
-import com.bridgelabz.fundoonotes.user.services.FacebookService;
 import com.bridgelabz.fundoonotes.user.services.UserService;
 
 @RestController
@@ -30,9 +28,6 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-	
-	@Autowired
-	private FacebookService facebookService;
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseEntity<Response> login(@RequestBody LoginDTO loginDTO , HttpServletResponse resp) throws LoginException, com.bridgelabz.fundoonotes.user.exceptions.LoginException {
@@ -93,21 +88,4 @@ public class UserController {
 		
 	}
 	
-	@GetMapping(value = "/createFacebookAuthorization")
-    public String createFacebookAuthorization() {
-        return facebookService.createFacebookAuthorizationURL();
-    }
-
-    @GetMapping(value = "/facebook")
-    public void createFacebookAccessToken(@RequestParam String code) {
-        facebookService.createFacebookAccessToken(code);
-    }
-
-    @GetMapping(value = "/getName")
-    public String getNameResponse() {
-        return facebookService.getName();
-    }
-
-
-
 }
