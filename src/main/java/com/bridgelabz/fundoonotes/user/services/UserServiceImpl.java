@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
 		
 		Utility.isLoginValidate(loginDTO);
 		
-		//Optional<User> optional = userRepository.findByEmailId(loginDTO.getEmailId());
+		//Optional<User> optionalUser = userRepository.findByEmailId(loginDTO.getEmailId());
 		Optional<User> optionalUser = esUser.findByEmailId(loginDTO.getEmailId());
 
 		if (!optionalUser.isPresent()) {
@@ -81,8 +81,8 @@ public class UserServiceImpl implements UserService {
 
 		Utility.isRegistrationValidate(registrationDTO);
 		
-		//Optional<User> optional = userRepository.findByEmailId(registrationDTO.getEmailId());
-		Optional<User> optionalUser = esUser.findByEmailId(registrationDTO.getEmailId());
+		Optional<User> optionalUser = userRepository.findByEmailId(registrationDTO.getEmailId());
+		//Optional<User> optionalUser = esUser.findByEmailId(registrationDTO.getEmailId());
 		if(optionalUser.isPresent()) {
 			throw new RegistrationException("You are already Registered");
 		}

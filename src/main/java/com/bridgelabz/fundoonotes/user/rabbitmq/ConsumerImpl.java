@@ -20,8 +20,10 @@ public class ConsumerImpl implements IConsumer {
 	
 	@RabbitListener(queues="jsa.queue",containerFactory="jsaFactory")
 	public void receiveMessage(Email email) throws MessagingException {
+		System.out.println("Inside receie message");
 		emailService.sendEmail(email);
 		LOGGER.info(email.toString());
+		System.out.println("outside receie message");
 	}
 	
 	

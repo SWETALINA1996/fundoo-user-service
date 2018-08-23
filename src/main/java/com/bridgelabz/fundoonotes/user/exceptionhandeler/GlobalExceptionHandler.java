@@ -21,7 +21,7 @@ public class GlobalExceptionHandler {
 
 	  @ExceptionHandler(RegistrationException.class)
 	    public ResponseEntity<Response> handleRegistrationException(RegistrationException e) {
-	       
+	      
 		  logger.error(e.getMessage());
 		  
 		  Response response = new Response();
